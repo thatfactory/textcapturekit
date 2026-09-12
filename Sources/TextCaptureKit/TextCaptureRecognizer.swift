@@ -30,7 +30,7 @@ public struct TextCaptureRecognizer: Sendable {
         do {
             let observations = try await request.perform(
                 on: image.data,
-                orientation: image.orientation.imagePropertyOrientation
+                orientation: image.orientation.imagePropertyOrientation(for: image.data)
             )
             return TextCaptureResult(observations: observations.map(Self.mapObservation))
         } catch is CancellationError {
@@ -70,24 +70,35 @@ public enum TextCaptureError: Error, Sendable, Equatable {
 
 extension TextCaptureImageOrientation {
     /// The corresponding Image I/O orientation used by Vision.
-    fileprivate var imagePropertyOrientation: CGImagePropertyOrientation {
+    func imagePropertyOrientation(for data: Data) -> CGImagePropertyOrientation {
         switch self {
+        case .automatic:
+            guard
+                let source = CGImageSourceCreateWithData(data as CFData, nil),
+                let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+                let rawValue = properties[kCGImagePropertyOrientation] as? UInt32,
+                let orientation = CGImagePropertyOrientation(rawValue: rawValue)
+            else {
+                return .up
+            }
+
+            return orientation
         case .down:
-            .down
+            return .down
         case .downMirrored:
-            .downMirrored
+            return .downMirrored
         case .left:
-            .left
+            return .left
         case .leftMirrored:
-            .leftMirrored
+            return .leftMirrored
         case .right:
-            .right
+            return .right
         case .rightMirrored:
-            .rightMirrored
+            return .rightMirrored
         case .up:
-            .up
+            return .up
         case .upMirrored:
-            .upMirrored
+            return .upMirrored
         }
     }
 }
