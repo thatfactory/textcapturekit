@@ -25,7 +25,3 @@ API documentation is published with DocC after a GitHub release. See the [TextCa
 - Xcode 27
 - Apple platform versions shown in the badge above
 - Swift Package Manager
-
-## License
-
-TextCaptureKit is available under the MIT license. See [LICENSE](LICENSE).
