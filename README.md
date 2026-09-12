@@ -11,9 +11,9 @@
 
 # TextCaptureKit
 
-TextCaptureKit is a reusable, UI-agnostic wrapper around Apple's Vision text-recognition APIs. It will convert host-supplied still images into structured recognized text while preserving candidates, confidence, and layout for application-owned review and correction.
+TextCaptureKit is a reusable, UI-agnostic wrapper around Apple's Vision text-recognition APIs. It converts host-supplied still images into structured recognized text while preserving candidates, confidence, and layout for application-owned review and correction.
 
-The package is currently a bootstrapped foundation. Camera capture, scanner UI, parsing, persistence, and product presentation remain host responsibilities.
+Camera capture, scanner UI, parsing, persistence, and product presentation remain host responsibilities.
 
 ## Documentation
 
