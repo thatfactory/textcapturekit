@@ -4,7 +4,7 @@ Recognize text in host-supplied images with Apple's Vision framework while prese
 
 ## Overview
 
-WortJagd is the first concrete consumer. It supplies encoded still-image data, selects an accuracy and language policy, and receives deterministic plain text together with the candidates, confidence, and normalized bounds that led to it.
+The host supplies encoded still-image data, selects an accuracy and language policy, and receives deterministic plain text together with the candidates, confidence, and normalized bounds that led to it.
 
 By default, ``TextCaptureImage`` reads the encoded image's orientation metadata before recognition. Hosts can provide an explicit orientation when the encoded data has no suitable metadata.
 
