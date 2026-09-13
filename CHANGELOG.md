@@ -4,6 +4,8 @@ All notable changes to TextCaptureKit are documented here.
 
 ## Unreleased
 
+## 0.1.1 - 2026-09-13
+
 ### Added
 
 - Added privacy-safe, emoji-prefixed recognition outcome logs through AppLogger.
