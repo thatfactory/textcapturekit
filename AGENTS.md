@@ -111,3 +111,4 @@ Replace these examples with exact repository paths:
 
 - Use the Vision framework for recognition; VisionKit acquisition and scanner UI remain host responsibilities.
 - Keep recognition asynchronous, results `Sendable`, and reading-order behavior deterministic.
+- TextCaptureKit's canonical logging emoji is 👁️.

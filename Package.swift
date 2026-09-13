@@ -29,7 +29,10 @@ let package = Package(
         ),
         .testTarget(
             name: "TextCaptureKitTests",
-            dependencies: ["TextCaptureKit"]
+            dependencies: [
+                "TextCaptureKit",
+                .product(name: "AppLogger", package: "applogger"),
+            ]
         ),
     ]
 )
