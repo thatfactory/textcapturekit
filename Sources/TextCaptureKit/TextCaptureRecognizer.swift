@@ -32,10 +32,18 @@ public struct TextCaptureRecognizer: Sendable {
                 on: image.data,
                 orientation: image.orientation.imagePropertyOrientation(for: image.data)
             )
+            TextCaptureLogging.emit(
+                .recognitionSucceeded(
+                    hasObservations: !observations.isEmpty,
+                    level: configuration.recognitionLevel
+                )
+            )
             return TextCaptureResult(observations: observations.map(Self.mapObservation))
         } catch is CancellationError {
+            TextCaptureLogging.emit(.recognitionCancelled)
             throw CancellationError()
         } catch {
+            TextCaptureLogging.emit(.recognitionFailed)
             throw TextCaptureError.recognitionFailed
         }
     }

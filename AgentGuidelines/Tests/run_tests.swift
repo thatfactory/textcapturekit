@@ -147,6 +147,44 @@ let tests: [(String, () throws -> Void)] = [
         }
     ),
     (
+        "repository validator rejects missing observability adoption guidance",
+        {
+            try withTemporaryDirectory { temporary in
+                let fixture = temporary.appendingPathComponent("repository")
+                try copyRepositoryFixture(to: fixture)
+                let readme = fixture.appendingPathComponent("README.md")
+                var contents = try String(contentsOf: readme, encoding: .utf8)
+                contents = contents.replacingOccurrences(of: "runtime-observability contract", with: "runtime contract")
+                try write(contents, to: readme)
+                let result = try run([fixture.appendingPathComponent("Scripts/validate_guidelines.swift").path])
+                try require(!result.succeeded, "missing observability adoption guidance unexpectedly passed")
+                try require(
+                    result.output.contains("missing runtime observability contract synchronization"), result.output)
+            }
+        }
+    ),
+    (
+        "repository validator rejects private dependency authentication drift",
+        {
+            try withTemporaryDirectory { temporary in
+                let fixture = temporary.appendingPathComponent("repository")
+                try copyRepositoryFixture(to: fixture)
+                let guideline = fixture.appendingPathComponent("Guidelines/CICD.md")
+                var contents = try String(contentsOf: guideline, encoding: .utf8)
+                contents = contents.replacingOccurrences(
+                    of: "isolated disposable or ephemeral self-hosted runner",
+                    with: "self-hosted runner")
+                try write(contents, to: guideline)
+                let result = try run([fixture.appendingPathComponent("Scripts/validate_guidelines.swift").path])
+                try require(!result.succeeded, "private dependency authentication drift unexpectedly passed")
+                try require(
+                    result.output.contains("missing untrusted-code runner isolation"),
+                    result.output
+                )
+            }
+        }
+    ),
+    (
         "repository validator rejects gitignore template drift",
         {
             try withTemporaryDirectory { temporary in

@@ -19,6 +19,8 @@ Camera capture, scanner UI, parsing, persistence, and product presentation remai
 
 API documentation is published with DocC after a GitHub release. See the [TextCaptureKit documentation](https://thatfactory.github.io/textcapturekit/documentation/textcapturekit/).
 
+TextCaptureKit emits privacy-safe recognition outcomes through AppLogger with subsystem `com.thatfactory.textcapturekit`, category `recognition`, and the canonical 👁️ prefix. It never logs image data or recognized text.
+
 ## Requirements
 
 - Swift 6.4
