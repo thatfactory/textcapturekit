@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 /// An encoded still image and its display orientation.
 public struct TextCaptureImage: Sendable, Hashable {
